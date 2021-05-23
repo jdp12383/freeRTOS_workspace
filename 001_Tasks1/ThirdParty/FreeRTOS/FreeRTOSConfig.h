@@ -52,7 +52,7 @@ header file. */
 #define configCPU_CLOCK_HZ        ( ( unsigned long ) 20000000 )
 #define configTICK_RATE_HZ        ( ( TickType_t ) 1000 )
 #define configMINIMAL_STACK_SIZE  ( ( unsigned short ) 2000 )
-#define configTOTAL_HEAP_SIZE     ( ( size_t ) ( 17 * 1024 ) )
+#define configTOTAL_HEAP_SIZE     ( ( size_t ) ( 10 * 1024 ) ) //Max is 20 Kbytes of SRAM
 #define configMAX_TASK_NAME_LEN   ( 10 )
 #define configUSE_TRACE_FACILITY    0
 #define configUSE_16_BIT_TICKS      0
