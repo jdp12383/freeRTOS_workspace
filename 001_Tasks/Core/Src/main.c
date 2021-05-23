@@ -44,6 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+#define DWT_CTRL	(*(volatile uint32_t*)0xE0001000) //Control register to enable cycling counting
 
 /* USER CODE END PV */
 
@@ -92,6 +93,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
+  // Enable cyclic counting by setting 1st bit to 1 in DWT_CTRL register
+  DWT_CTRL |= (1 << 0);
+
+  // Configure and then start the recording of events
+  SEGGER_SYSVIEW_Conf();
+  SEGGER_SYSVIEW_Start();
+
   ret = xTaskCreate(task1_handler, "Task-1", 50, "Hello World from Task-1!", 2, &hTask1);
   configASSERT(ret == pdPASS);
 
@@ -302,6 +311,7 @@ static void task1_handler(void *param)
 	while(1)
 	{
 		printf("%s \n", (char *)param);
+		//taskYIELD();
 	}
 }
 
@@ -310,6 +320,7 @@ static void task2_handler(void *param)
 	while(1)
 	{
 		printf("%s \n", (char *)param);
+		//taskYIELD();
 	}
 }
 /* USER CODE END 4 */
